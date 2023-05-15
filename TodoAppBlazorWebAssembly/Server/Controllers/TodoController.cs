@@ -31,4 +31,16 @@ public class TodoController : ControllerBase
     {
         _todoService.Delete(text);
     }
+
+    [HttpPost("complete")]
+    public void Complete(TodoItem item)
+    {
+        _todoService.Complete(item);
+    }
+
+    [HttpPost("uncomplete")]
+    public void Uncomplete(TodoItem item)
+    {
+        _todoService.Uncomplete(item);
+    }
 }

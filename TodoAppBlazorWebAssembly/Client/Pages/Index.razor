@@ -20,8 +20,20 @@ else
             {
                 <div style="display: flex; margin-bottom: 10px;">
                     <div style="display: flex; align-items: center;margin-bottom: 10px;">
-                        <div style="width: 280px;">@todo.Text</div>
+                        <div class="@ItemClass(todo)" style="width: 280px;">@todo.Text</div>
                     </div>
+                    @if (todo.Completed)
+                    {
+                        <div style="width: 120px">
+                            <button class="btn btn-primary" onclick="@(() => UncompleteItem(todo))">Uncomplete</button>
+                        </div>
+                    }
+                    @if (!todo.Completed)
+                    {
+                        <div style="width: 120px">
+                            <button class="btn btn-primary" onclick="@(() => CompleteItem(todo))">Complete</button>
+                        </div>
+                    }
                     <div>
                         <button class="btn btn-danger" onclick="@(() => DeleteItem(todo))">Delete</button>
                     </div>
@@ -49,5 +61,22 @@ else
     {
         await Http.DeleteAsync($"Todo/{item.Text}");
         ItemsChanged();
+    }
+
+    public async void CompleteItem(TodoItem item)
+    {
+        await Http.PostAsJsonAsync("Todo/complete", item);
+        ItemsChanged();
+    }
+
+    public async void UncompleteItem(TodoItem item)
+    {
+        await Http.PostAsJsonAsync("Todo/uncomplete", item);
+        ItemsChanged();
+    }
+
+    public string ItemClass(TodoItem item)
+    {
+        return item.Completed ? "item-completed" : "";
     }
 }

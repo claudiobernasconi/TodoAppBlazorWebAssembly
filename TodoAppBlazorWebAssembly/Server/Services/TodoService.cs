@@ -27,4 +27,16 @@ public class TodoService : ITodoService
         var item = _items.Single(x => x.Text == text);
         _items.Remove(item);
     }
+
+    public void Complete(TodoItem item)
+    {
+        var todoItem = _items.Single(i => i.Text == item.Text);
+        todoItem.Completed = true;
+    }
+
+    public void Uncomplete(TodoItem item)
+    {
+        var todoItem = _items.Single(i => i.Text == item.Text);
+        todoItem.Completed = false;
+    }
 }
