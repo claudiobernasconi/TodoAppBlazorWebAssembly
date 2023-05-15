@@ -19,4 +19,10 @@ public class TodoController : ControllerBase
     {
         return _todoService.GetAll();
     }
+
+    [HttpPost]
+    public void Post(TodoItem item)
+    {
+        _todoService.Add(item);
+    }
 }

@@ -16,4 +16,9 @@ public class TodoService : ITodoService
     {
         return _items.ToList();
     }
+
+    public void Add(TodoItem item)
+    {
+        _items.Add(item);
+    }
 }

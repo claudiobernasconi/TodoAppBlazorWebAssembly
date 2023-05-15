@@ -9,6 +9,11 @@
 }
 else
 {
+    <div class="border" style="padding: 20px;">
+        <h4>New Item</h4>
+        <TodoItemForm OnItemAdded="@ItemsChanged" />
+    </div>
+
     <div class="border" style="padding: 20px; margin-top: 20px;">
         <div style="display: flex; flex-direction: column">
             @foreach (var todo in _todoItems)
@@ -29,5 +34,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         _todoItems = await Http.GetFromJsonAsync<TodoItem[]>("Todo");
+    }
+
+    public async void ItemsChanged()
+    {
+        _todoItems = await Http.GetFromJsonAsync<TodoItem[]>("Todo");
+        StateHasChanged();
     }
 }
