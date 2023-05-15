@@ -22,6 +22,9 @@ else
                     <div style="display: flex; align-items: center;margin-bottom: 10px;">
                         <div style="width: 280px;">@todo.Text</div>
                     </div>
+                    <div>
+                        <button class="btn btn-danger" onclick="@(() => DeleteItem(todo))">Delete</button>
+                    </div>
                 </div>
             }
         </div>
@@ -40,5 +43,11 @@ else
     {
         _todoItems = await Http.GetFromJsonAsync<TodoItem[]>("Todo");
         StateHasChanged();
+    }
+
+    public async void DeleteItem(TodoItem item)
+    {
+        await Http.DeleteAsync($"Todo/{item.Text}");
+        ItemsChanged();
     }
 }

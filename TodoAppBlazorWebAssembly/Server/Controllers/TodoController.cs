@@ -25,4 +25,10 @@ public class TodoController : ControllerBase
     {
         _todoService.Add(item);
     }
+
+    [HttpDelete("{text}")]
+    public void Delete(string text)
+    {
+        _todoService.Delete(text);
+    }
 }

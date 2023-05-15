@@ -21,4 +21,10 @@ public class TodoService : ITodoService
     {
         _items.Add(item);
     }
+
+    public void Delete(string text)
+    {
+        var item = _items.Single(x => x.Text == text);
+        _items.Remove(item);
+    }
 }
